@@ -11,8 +11,8 @@ public class DrawingObject implements IDrawingObject {
      * I know that this should not be public,
      * but with this people can better extend this
      */
-    public Position position;
-    public Boolean visible;
+    public Position position = new Position();
+    public Boolean visible = false;
     /**
      * Show Object in Canvas
      */
@@ -37,6 +37,17 @@ public class DrawingObject implements IDrawingObject {
     @Override
     public void setVisibility(Boolean visibility) {
         visible = visibility;
+    }
+
+    /**
+     * Set size
+     *
+     * @param x
+     * @param y
+     */
+    @Override
+    public void setSize(int x, int y) {
+
     }
 
     /**

@@ -26,6 +26,12 @@ public interface IDrawingObject {
     void setVisibility(Boolean visibility);
 
     /**
+     * Set size
+     * @param x
+     * @param y
+     */
+    void setSize(int x, int y);
+    /**
      * Set Position
      * @param pos Position as position
      */
