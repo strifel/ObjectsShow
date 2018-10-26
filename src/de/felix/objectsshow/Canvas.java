@@ -14,7 +14,8 @@ public class Canvas {
     public JFrame frame;
     public long nextRender;
     public long lastRender;
-    public int time_bt_render;
+    public int time_bt_render = 33;
+    public int currentFPS;
     public Thread drawThread;
 
     public Canvas(String title, int sizeX, int sizeY) {
@@ -43,6 +44,10 @@ public class Canvas {
         frame.setBackground(color);
     }
 
+    public int getCurrentFPS() {
+        return currentFPS;
+    }
+
     public Runnable drawRunnabe = new Runnable() {
         @Override
         public void run() {
@@ -58,13 +63,16 @@ public class Canvas {
                 lastRender = System.currentTimeMillis();
                 nextRender = nextRender + time_bt_render;
                 if (nextRender - lastRender > 0) {
+                    currentFPS = 1000 / time_bt_render;
                     try {
                         Thread.sleep(nextRender - lastRender);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 } else {
-                    System.err.println("System running too slow, skipped " + (lastRender - nextRender) + "ms");
+                    long skipped = lastRender - nextRender;
+                    System.err.println("System running too slow, skipped " + skipped + "ms");
+                    currentFPS = Math.toIntExact(1000 / (lastRender - System.currentTimeMillis()));
                     nextRender = System.currentTimeMillis();
                 }
             }
