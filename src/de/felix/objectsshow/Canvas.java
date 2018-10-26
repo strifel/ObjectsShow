@@ -72,7 +72,10 @@ public class Canvas {
                 } else {
                     long skipped = lastRender - nextRender;
                     System.err.println("System running too slow, skipped " + skipped + "ms");
-                    currentFPS = Math.toIntExact(1000 / (lastRender - System.currentTimeMillis()));
+                    long fps_dif = lastRender - System.currentTimeMillis();
+                    if (fps_dif > 0){
+                        currentFPS = Math.toIntExact(1000 / fps_dif);
+                    }
                     nextRender = System.currentTimeMillis();
                 }
             }

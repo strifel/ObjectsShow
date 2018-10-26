@@ -1,6 +1,7 @@
 package test.objectshow;
 
 import de.felix.objectsshow.Canvas;
+import de.felix.objectsshow.templates.FPSShow;
 import de.felix.objectsshow.templates.Quader;
 
 public class Test {
@@ -11,5 +12,8 @@ public class Test {
         quader.setQuaderSize(50);
         quader.show();
         canvas.addObject(quader);
+        FPSShow fps = new FPSShow(canvas);
+        fps.show();
+        canvas.addObject(fps);
     }
 }
