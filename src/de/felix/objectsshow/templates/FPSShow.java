@@ -15,7 +15,8 @@ public class FPSShow extends DrawingObject {
     @Override
     public void draw(Graphics graphics) {
         if (visible)
-            graphics.drawChars(Integer.toString(canvas.currentFPS).toCharArray(), position.getX().intValue(), position.getY().intValue(), 20, 20);
+            graphics.setColor(Color.BLACK);
+            graphics.drawString(Integer.toString(canvas.currentFPS), position.getX().intValue(), position.getY().intValue());
 
     }
 

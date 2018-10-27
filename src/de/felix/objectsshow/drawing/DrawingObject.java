@@ -86,6 +86,11 @@ public class DrawingObject implements IDrawingObject {
             public void run() {
                 for (Double i = 0.0; i <= distance; i= i + forward){
                     move(direction, forward);
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }).start();
