@@ -1,6 +1,5 @@
 package de.felix.objectsshow.drawing;
 
-import de.felix.objectsshow.Canvas;
 import de.felix.objectsshow.Direction;
 
 import java.awt.*;
@@ -13,6 +12,7 @@ public class DrawingObject implements IDrawingObject {
      */
     public Position position = new Position();
     public Boolean visible = false;
+    public Color color = Color.BLACK;
     /**
      * Show Object in Canvas
      */
@@ -27,6 +27,16 @@ public class DrawingObject implements IDrawingObject {
     @Override
     public void hide() {
         setVisibility(false);
+    }
+
+    /**
+     * Sets the color
+     *
+     * @param color color as awt color
+     */
+    @Override
+    public void setColor(Color color) {
+        this.color = color;
     }
 
     /**
@@ -80,7 +90,7 @@ public class DrawingObject implements IDrawingObject {
      */
     @Override
     public void moveSlowly(Direction direction, Double distance) {
-        Double forward = distance * 0.01;
+        Double forward = 1.0;
         new Thread(new Runnable() {
             @Override
             public void run() {

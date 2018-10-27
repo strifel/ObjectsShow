@@ -2,10 +2,12 @@ package de.felix.objectsshow;
 
 
 import de.felix.objectsshow.drawing.IDrawingObject;
+import de.felix.objectsshow.plugin.PluginManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 
 
 public class Canvas {
@@ -17,13 +19,16 @@ public class Canvas {
     public int time_bt_render = 33;
     public int currentFPS;
     public Thread drawThread;
+    public PluginManager pluginManager;
 
     public Canvas(String title, int sizeX, int sizeY) {
         drawingObjects = new ArrayList<>();
+        pluginManager = new PluginManager(this);
         frame = new JFrame(title);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(sizeX, sizeY);
+        frame.addKeyListener(pluginManager);
         drawThread = new Thread(drawRunnabe);
         drawThread.start();
     }
@@ -51,14 +56,17 @@ public class Canvas {
     public Runnable drawRunnabe = new Runnable() {
         @Override
         public void run() {
-            //Maybe do not use true
+            //TODO Maybe do not use true
             nextRender = System.currentTimeMillis();
 
 
             while (true) {
                 frame.getGraphics().clearRect(0, 0, frame.getWidth(), frame.getHeight());
-                for (IDrawingObject object : drawingObjects) {
-                    object.draw(frame.getGraphics());
+                try {
+                    for (IDrawingObject object : drawingObjects) {
+                        object.draw(frame.getGraphics());
+                    }
+                } catch (ConcurrentModificationException ignored) {
                 }
                 lastRender = System.currentTimeMillis();
                 nextRender = nextRender + time_bt_render;

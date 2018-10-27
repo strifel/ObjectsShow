@@ -1,4 +1,4 @@
-package de.felix.objectsshow.templates;
+package de.felix.objectsshow.objects;
 
 import de.felix.objectsshow.drawing.DrawingObject;
 
@@ -20,6 +20,7 @@ public class Quader extends DrawingObject {
 
     @Override
     public void draw(Graphics graphics) {
+        graphics.setColor(color);
         graphics.fillRect(position.getX().intValue(),position.getY().intValue(), x, y );
     }
 }

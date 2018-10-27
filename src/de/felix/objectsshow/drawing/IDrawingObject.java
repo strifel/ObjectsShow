@@ -20,6 +20,12 @@ public interface IDrawingObject {
     //setter
 
     /**
+     * Sets the color
+     *
+     * @param color color as awt color
+     */
+    void setColor(Color color);
+    /**
      * Set visibility
      * @param visibility visibile if true
      */
