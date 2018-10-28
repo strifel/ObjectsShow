@@ -29,6 +29,7 @@ public class Canvas {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(sizeX, sizeY);
         frame.addKeyListener(pluginManager);
+        frame.addMouseListener(pluginManager);
         drawThread = new Thread(drawRunnabe);
         drawThread.start();
     }
